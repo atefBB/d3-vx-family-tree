@@ -1,9 +1,9 @@
-import React from 'react'
-import { Group } from '@vx/group'
-import { Tree } from '@vx/hierarchy'
-import { LinearGradient } from '@vx/gradient'
-import { hierarchy } from 'd3-hierarchy'
-import { pointRadial } from 'd3-shape'
+import React from "react";
+import { Group } from "@vx/group";
+import { Tree } from "@vx/hierarchy";
+import { LinearGradient } from "@vx/gradient";
+import { hierarchy } from "d3-hierarchy";
+import { pointRadial } from "d3-shape";
 
 import {
   LinkHorizontal,
@@ -17,214 +17,212 @@ import {
   LinkRadialCurve,
   LinkHorizontalLine,
   LinkVerticalLine,
-  LinkRadialLine
-} from '@vx/shape'
+  LinkRadialLine,
+} from "@vx/shape";
 
 const data = {
-  name: '',
+  name: "",
   children: [
     {
-      name: 'J A',
+      name: "J A",
       id: 1,
-      gender: 'Female',
+      gender: "Female",
       hasParnter: true,
-      imageUrl: '/avatar/gravator.jpg'
+      imageUrl: "/avatar/gravator.jpg",
     },
     {
-      name: 'Mr. J A',
+      name: "Mr. J A",
       id: 2,
       partnerId: 1,
       noParent: true,
       children: [
         {
-          name: 'P A',
+          name: "P A",
           id: 3,
-          gender: 'Female',
+          gender: "Female",
           isSource: true,
-          hasParnter: true
+          hasParnter: true,
         },
         {
-          name: 'MK N A',
+          name: "MK N A",
           id: 5,
           partnerId: 3,
-          gender: 'Male',
+          gender: "Male",
           noParent: true,
           children: [
             {
-              name: 'B K',
+              name: "B K",
               id: 100,
-              hasParnter: true
-            },
-            {
-              name: 'D MM',
-              id: 102,
-              partnerId: 100,
-              gender: 'Female',
-              noParent: true,
-              children: [{ name: 'D MM', gender: 'Female' }]
-            },
-            {
-              name: 'MM D',
-              id: 102,
-              partnerId: 100,
-              gender: 'Female',
-              noParent: true,
-              children: [{ name: 'B MM' }]
-            },
-            {
-              name: 'V PK',
-              id: 200,
-              gender: 'Female',
               hasParnter: true,
-              imageUrl: '/avatar/v-pk.jpeg'
             },
             {
-              name: 'EK T N',
+              name: "D MM",
+              id: 102,
+              partnerId: 100,
+              gender: "Female",
+              noParent: true,
+              children: [{ name: "D MM", gender: "Female" }],
+            },
+            {
+              name: "MM D",
+              id: 102,
+              partnerId: 100,
+              gender: "Female",
+              noParent: true,
+              children: [{ name: "B MM" }],
+            },
+            {
+              name: "V PK",
+              id: 200,
+              gender: "Female",
+              hasParnter: true,
+              imageUrl: "/avatar/v-pk.jpeg",
+            },
+            {
+              name: "EK T N",
               id: 201,
               partnerId: 200,
               noParent: true,
               children: [
                 {
-                  name: 'S PK',
-                  gender: 'Female'
+                  name: "S PK",
+                  gender: "Female",
                 },
                 {
-                  name: 'Sku PK'
+                  name: "Sku PK",
                 },
                 {
-                  name: 'Sj PK'
+                  name: "Sj PK",
                 },
                 {
-                  name: 'Ska PK'
-                }
-              ]
+                  name: "Ska PK",
+                },
+              ],
             },
-
             {
-              name: 'V K',
+              name: "V K",
               id: 300,
               hasParnter: true,
-              imageUrl: '/avatar/v-k.jpeg'
+              imageUrl: "/avatar/v-k.jpeg",
             },
             {
-              name: 'M PG',
-              gender: 'Female',
+              name: "M PG",
+              gender: "Female",
               id: 301,
               partnerId: 300,
               noParent: true,
               children: [
                 {
-                  name: 'V K',
+                  name: "V K",
                   id: 3001,
-                  imageUrl: '/avatar/v-k-1.jpeg'
+                  imageUrl: "/avatar/v-k-1.jpeg",
                 },
                 {
-                  name: 'V KV'
-                }
-              ]
+                  name: "V KV",
+                },
+              ],
             },
             {
-              name: 'R PK',
+              name: "R PK",
               id: 400,
-              hasParnter: true
+              hasParnter: true,
             },
             {
-              name: 'S VV',
-              gender: 'Female',
+              name: "S VV",
+              gender: "Female",
               id: 401,
               partnerId: 400,
               noParent: true,
               children: [
                 {
-                  name: 'A R',
-                  gender: 'Female'
+                  name: "A R",
+                  gender: "Female",
                 },
                 {
-                  name: 'C K'
-                }
-              ]
-            }
-          ]
+                  name: "C K",
+                },
+              ],
+            },
+          ],
         },
-
         {
-          name: 'Dummy',
+          name: "Dummy",
           id: 4,
           partnerId: 3,
-          gender: 'Male',
+          gender: "Male",
           noParent: true,
-          imageUrl: '/avatar/dummy.png',
+          imageUrl: "/avatar/dummy.png",
           children: [
             {
-              name: 'Sam'
+              name: "Sam",
             },
             {
-              name: 'Thomas'
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+              name: "Thomas",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
 
 export default class extends React.Component {
   state = {
-    layout: 'cartesian',
-    orientation: 'horizontal',
-    linkType: 'diagonal',
+    layout: "cartesian",
+    orientation: "horizontal",
+    linkType: "diagonal",
     stepPercent: 1,
     showOptions: false,
     nodeId: null,
-    nodeName: '',
-    nodeImageUrl: '',
-    treeData: {}
-  }
+    nodeName: "",
+    nodeImageUrl: "",
+    treeData: {},
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.showNodeOptions = this.showNodeOptions.bind(this)
-    this.updateTree = this.updateTree.bind(this)
-    this.fetchNodeTree = this.fetchNodeTree.bind(this)
+    this.showNodeOptions = this.showNodeOptions.bind(this);
+    this.updateTree = this.updateTree.bind(this);
+    this.fetchNodeTree = this.fetchNodeTree.bind(this);
   }
 
   componentDidMount() {
-    this.setState({ treeData: data })
+    this.setState({ treeData: data });
   }
 
   showNodeOptions(node) {
-    const { showOptions } = this.state
-    const imageUrl = node.data && node.data.imageUrl ? node.data.imageUrl : ''
-    const name = node.data && node.data.name ? node.data.name : ''
-    const nodeId = node.data && node.data.id ? node.data.id : ''
+    const { showOptions } = this.state;
+    const imageUrl = node.data && node.data.imageUrl ? node.data.imageUrl : "";
+    const name = node.data && node.data.name ? node.data.name : "";
+    const nodeId = node.data && node.data.id ? node.data.id : "";
     this.setState({
       showOptions: !showOptions,
       nodeImageUrl: imageUrl,
       nodeName: name,
-      nodeId: nodeId
-    })
+      nodeId: nodeId,
+    });
   }
 
   fetchNodeTree() {
-    const { nodeId, showOptions } = this.state
+    const { nodeId, showOptions } = this.state;
     fetch(`/json/${nodeId}.json`)
-      .then(res => {
-        return res.status === 200 ? res.json() : {}
+      .then((res) => {
+        return res.status === 200 ? res.json() : {};
       })
-      .then(treeData => {
+      .then((treeData) => {
         this.setState({ treeData: treeData, showOptions: !showOptions }, () => {
-          this.forceUpdate()
-        })
+          this.forceUpdate();
+        });
       })
       .catch(() => {
-        alert('Invalid request!')
-      })
+        alert("Invalid request!");
+      });
   }
 
   updateTree(node) {
-    node.data.isExpanded = !node.data.isExpanded
-    this.forceUpdate()
+    node.data.isExpanded = !node.data.isExpanded;
+    this.forceUpdate();
   }
 
   render() {
@@ -235,15 +233,15 @@ export default class extends React.Component {
         top: 30,
         left: 30,
         right: 30,
-        bottom: 30
-      }
-    } = this.props
-    let partners = []
-    const nameLineHeight = 1.2
-    const fontSize = 9
+        bottom: 30,
+      },
+    } = this.props;
+    let partners = [];
+    const nameLineHeight = 1.2;
+    const fontSize = 9;
 
-    const circleRadius = 24
-    const avatarSize = circleRadius * 2
+    const circleRadius = 24;
+    const avatarSize = circleRadius * 2;
 
     const {
       treeData,
@@ -253,81 +251,81 @@ export default class extends React.Component {
       stepPercent,
       showOptions,
       nodeImageUrl,
-      nodeName
-    } = this.state
+      nodeName,
+    } = this.state;
 
-    const innerWidth = width - margin.left - margin.right
-    const innerHeight = height - margin.top - margin.bottom
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
 
-    let origin
-    let sizeWidth
-    let sizeHeight
+    let origin;
+    let sizeWidth;
+    let sizeHeight;
 
-    if (layout === 'polar') {
+    if (layout === "polar") {
       origin = {
         x: innerWidth / 2,
-        y: innerHeight / 2
-      }
-      sizeWidth = 2 * Math.PI
-      sizeHeight = Math.min(innerWidth, innerHeight) / 2
+        y: innerHeight / 2,
+      };
+      sizeWidth = 2 * Math.PI;
+      sizeHeight = Math.min(innerWidth, innerHeight) / 2;
     } else {
-      origin = { x: 0, y: 0 }
-      if (orientation === 'vertical') {
-        sizeWidth = innerWidth
-        sizeHeight = innerHeight
+      origin = { x: 0, y: 0 };
+      if (orientation === "vertical") {
+        sizeWidth = innerWidth;
+        sizeHeight = innerHeight;
         /* As root note is hidden, adjust tree's Y positioning */
-        origin.y -= sizeHeight / 10
+        origin.y -= sizeHeight / 10;
       } else {
-        sizeWidth = innerHeight
-        sizeHeight = innerWidth
+        sizeWidth = innerHeight;
+        sizeHeight = innerWidth;
         /* As root note is hidden, adjust tree's X positioning */
-        origin.x -= sizeHeight / 10
+        origin.x -= sizeHeight / 10;
       }
     }
 
-    let LinkComponent
+    let LinkComponent;
 
-    if (layout === 'polar') {
-      if (linkType === 'step') {
-        LinkComponent = LinkRadialStep
-      } else if (linkType === 'curve') {
-        LinkComponent = LinkRadialCurve
-      } else if (linkType === 'line') {
-        LinkComponent = LinkRadialLine
+    if (layout === "polar") {
+      if (linkType === "step") {
+        LinkComponent = LinkRadialStep;
+      } else if (linkType === "curve") {
+        LinkComponent = LinkRadialCurve;
+      } else if (linkType === "line") {
+        LinkComponent = LinkRadialLine;
       } else {
-        LinkComponent = LinkRadial
+        LinkComponent = LinkRadial;
       }
     } else {
-      if (orientation === 'vertical') {
-        if (linkType === 'step') {
-          LinkComponent = LinkVerticalStep
-        } else if (linkType === 'curve') {
-          LinkComponent = LinkVerticalCurve
-        } else if (linkType === 'line') {
-          LinkComponent = LinkVerticalLine
+      if (orientation === "vertical") {
+        if (linkType === "step") {
+          LinkComponent = LinkVerticalStep;
+        } else if (linkType === "curve") {
+          LinkComponent = LinkVerticalCurve;
+        } else if (linkType === "line") {
+          LinkComponent = LinkVerticalLine;
         } else {
-          LinkComponent = LinkVertical
+          LinkComponent = LinkVertical;
         }
       } else {
-        if (linkType === 'step') {
-          LinkComponent = LinkHorizontalStep
-        } else if (linkType === 'curve') {
-          LinkComponent = LinkHorizontalCurve
-        } else if (linkType === 'line') {
-          LinkComponent = LinkHorizontalLine
+        if (linkType === "step") {
+          LinkComponent = LinkHorizontalStep;
+        } else if (linkType === "curve") {
+          LinkComponent = LinkHorizontalCurve;
+        } else if (linkType === "line") {
+          LinkComponent = LinkHorizontalLine;
         } else {
-          LinkComponent = LinkHorizontal
+          LinkComponent = LinkHorizontal;
         }
       }
     }
 
     return (
       <div>
-        <div style={{ color: 'rgba(38, 150, 136, 1.000)', fontSize: 10 }}>
+        <div style={{ color: "rgba(38, 150, 136, 1.000)", fontSize: 10 }}>
           <label>layout:</label>
           <select
-            onClick={e => e.stopPropagation()}
-            onChange={e => this.setState({ layout: e.target.value })}
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => this.setState({ layout: e.target.value })}
             value={layout}
           >
             <option value="cartesian">cartesian</option>
@@ -336,10 +334,10 @@ export default class extends React.Component {
 
           <label>orientation:</label>
           <select
-            onClick={e => e.stopPropagation()}
-            onChange={e => this.setState({ orientation: e.target.value })}
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => this.setState({ orientation: e.target.value })}
             value={orientation}
-            disabled={layout === 'polar'}
+            disabled={layout === "polar"}
           >
             <option value="vertical">vertical</option>
             <option value="horizontal">horizontal</option>
@@ -347,8 +345,8 @@ export default class extends React.Component {
 
           <label>link:</label>
           <select
-            onClick={e => e.stopPropagation()}
-            onChange={e => this.setState({ linkType: e.target.value })}
+            onClick={(e) => e.stopPropagation()}
+            onChange={(e) => this.setState({ linkType: e.target.value })}
             value={linkType}
           >
             <option value="diagonal">diagonal</option>
@@ -359,14 +357,14 @@ export default class extends React.Component {
 
           <label>step:</label>
           <input
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
             type="range"
             min={0}
             max={1}
             step={0.1}
-            onChange={e => this.setState({ stepPercent: e.target.value })}
+            onChange={(e) => this.setState({ stepPercent: e.target.value })}
             value={stepPercent}
-            disabled={linkType !== 'step' || layout === 'polar'}
+            disabled={linkType !== "step" || layout === "polar"}
           />
         </div>
         <svg width={width} height={height}>
@@ -379,7 +377,7 @@ export default class extends React.Component {
           <rect width={width} height={height} rx={0} fill="#272b4d" />
           <Group top={margin.top} left={margin.left}>
             <Tree
-              root={hierarchy(treeData, d =>
+              root={hierarchy(treeData, (d) =>
                 d.isExpanded ? null : d.children
               )}
               size={[sizeWidth, sizeHeight]}
@@ -387,18 +385,18 @@ export default class extends React.Component {
                 (a.parent === b.parent ? 0.5 : 0.75) / a.depth
               }
             >
-              {data => (
+              {(data) => (
                 <Group top={origin.y} left={origin.x}>
                   {data.links().map((link, i) => {
                     if (link.target.data.hasParnter) {
-                      partners.push(link.target)
+                      partners.push(link.target);
                     }
                     /* Do not show the link from root empty object */
                     if (link.source.depth === 0) {
-                      return null
+                      return null;
                     }
                     if (link.target.data.noParent === true) {
-                      return null
+                      return null;
                     }
 
                     return (
@@ -410,20 +408,20 @@ export default class extends React.Component {
                         fill="none"
                         key={i}
                       />
-                    )
+                    );
                   })}
                   {/* Draw Partners Line */}
                   {data.links().map((link, i) => {
-                    if (typeof link.target.data.partnerId !== 'number') {
-                      return null
+                    if (typeof link.target.data.partnerId !== "number") {
+                      return null;
                     }
-                    const nodePartnerId = link.target.data.partnerId
+                    const nodePartnerId = link.target.data.partnerId;
 
-                    const linkSource = partners.filter(partner => {
-                      return partner.data.id === nodePartnerId ? partner : null
-                    })
+                    const linkSource = partners.filter((partner) => {
+                      return partner.data.id === nodePartnerId ? partner : null;
+                    });
 
-                    link.source = linkSource[0]
+                    link.source = linkSource[0];
 
                     return link.source !== undefined ? (
                       <LinkComponent
@@ -434,51 +432,53 @@ export default class extends React.Component {
                         fill="none"
                         key={i}
                       />
-                    ) : null
+                    ) : null;
                   })}
 
                   {data.descendants().map((node, key) => {
                     /* Do not show the empty root object */
                     if (node.depth === 0) {
-                      return null
+                      return null;
                     }
-                    const gender = node.data.gender
-                    const isFemale = gender === 'Female' ? true : false
-                    const name = node.data.name || ''
-                    const nameLength = name.length * 4
+                    const gender = node.data.gender;
+                    const isFemale = gender === "Female" ? true : false;
+                    const name = node.data.name || "";
+                    const nameLength = name.length * 4;
 
-                    let top
-                    let left
-                    if (layout === 'polar') {
-                      const [radialX, radialY] = pointRadial(node.x, node.y)
-                      top = radialY
-                      left = radialX
+                    let top;
+                    let left;
+                    if (layout === "polar") {
+                      const [radialX, radialY] = pointRadial(node.x, node.y);
+                      top = radialY;
+                      left = radialX;
                     } else {
-                      if (orientation === 'vertical') {
-                        top = node.y
-                        left = node.x
+                      if (orientation === "vertical") {
+                        top = node.y;
+                        left = node.x;
                       } else {
-                        top = node.x
-                        left = node.y
+                        top = node.x;
+                        left = node.y;
                       }
                     }
-                    const isSource = node.data.isSource
-                    const imageId = 'image_' + key
-                    const imageUrl = node.data.imageUrl
-                    const hasImage = imageUrl !== undefined && imageUrl !== ''
+
+                    const isSource = node.data.isSource;
+                    const imageId = "image_" + key;
+                    const imageUrl = node.data.imageUrl;
+                    const hasImage = imageUrl !== undefined && imageUrl !== "";
+
                     return (
                       <Group
                         top={top}
                         left={left}
                         key={key}
-                        className={isSource !== true ? 'node-group' : ''}
+                        className={isSource !== true ? "node-group" : ""}
                         onClick={() => {
                           return isSource !== true
                             ? this.showNodeOptions(node)
-                            : void 0
+                            : void 0;
                         }}
                       >
-                        {hasImage === true && imageUrl !== '' && (
+                        {hasImage === true && imageUrl !== "" && (
                           <defs>
                             <pattern
                               id={imageId}
@@ -502,19 +502,19 @@ export default class extends React.Component {
                                 ? "url('#lgFemale')"
                                 : "url('#lgMale')"
                               : node.data.isPartner !== true
-                              ? '#272b4d'
+                              ? "#272b4d"
                               : "url('#lgSpouse')"
                           }
                           className={
                             !isSource
-                              ? 'node ' + (isFemale ? 'female' : 'male')
-                              : ''
+                              ? "node " + (isFemale ? "female" : "male")
+                              : ""
                           }
                           strokeWidth={1}
                           strokeDasharray={
                             !node.data.children && !node.data.hasParnter
-                              ? '2,2'
-                              : '0'
+                              ? "2,2"
+                              : "0"
                           }
                           strokeOpacity={1}
                         />
@@ -531,14 +531,14 @@ export default class extends React.Component {
                           dy={circleRadius - fontSize}
                           fontSize={fontSize}
                           fontFamily="Arial"
-                          textAnchor={'middle'}
-                          style={{ pointerEvents: 'none' }}
+                          textAnchor={"middle"}
+                          style={{ pointerEvents: "none" }}
                           className="node"
                         >
                           {name}
                         </text>
                       </Group>
-                    )
+                    );
                   })}
                 </Group>
               )}
@@ -564,13 +564,13 @@ export default class extends React.Component {
                 </header>
                 <section className="modal-card-body">
                   <div className="content">
-                    Do you want to see the family tree of the member{' '}
+                    Do you want to see the family tree of the member{" "}
                     <img
                       src={nodeImageUrl}
                       width={avatarSize}
                       height={avatarSize}
                       alt={nodeName}
-                    />{' '}
+                    />{" "}
                     <b>{nodeName}</b>?
                   </div>
                 </section>
@@ -593,6 +593,6 @@ export default class extends React.Component {
           </React.Fragment>
         )}
       </div>
-    )
+    );
   }
 }
